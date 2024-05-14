@@ -65,7 +65,8 @@ async def preview(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def done(update: Update, context: ContextTypes.DEFAULT_TYPE):
     new_sticker = telegram.InputSticker(
         open(os.path.join(".", "temp", f"{update.effective_chat.id}.png"), "rb"),
-        ["💬"]
+        ["💬"],
+        format="static"
     )
     await context.bot.add_sticker_to_set(552476029, "epd_quotes_by_epd_quotes_bot", new_sticker)
     sticker_set = await context.bot.get_sticker_set("epd_quotes_by_epd_quotes_bot")
