@@ -1,0 +1,7 @@
+[Unit]
+Description=EPD Quotes Bot
+
+[Service]
+ExecStart=%h/epd-quotes-bot/env/bin/python3 %h/epd-quotes-bot/app.py
+WorkingDirectory=%h/epd-quotes-bot
+
