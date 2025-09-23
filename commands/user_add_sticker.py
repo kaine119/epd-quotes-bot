@@ -21,22 +21,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return QUOTE_TEXT
 
 async def quote_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    reply_keyboard = [["yes, it's wuping", "no, it's someone else this time"]]
-    chat_data[update.effective_chat.id] = { "quote": update.message.text }
-    await update.message.reply_text(
-        "Is this from everyone's favourite prof, or is it someone else?",
-        reply_markup=ReplyKeyboardMarkup(
-            reply_keyboard, one_time_keyboard=True
-        )
-    )
-    return DEFAULT_OR_NEW_AUTHOR
-
-
-async def new_author(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "Who said this?"
     )
-
     return PREVIEW
 
 async def preview(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -96,10 +83,6 @@ handler = ConversationHandler(
     entry_points=[CommandHandler("new_quote", start)],
     states={
         QUOTE_TEXT: [MessageHandler(filters.TEXT, quote_text)],
-        DEFAULT_OR_NEW_AUTHOR: [
-            MessageHandler(filters.Regex("^yes, it's wuping$"), preview),
-            MessageHandler(filters.Regex("^no, it's someone else this time"), new_author)
-        ],
         PREVIEW: [
             MessageHandler(filters.TEXT, preview),
         ],
