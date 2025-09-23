@@ -9,17 +9,18 @@ def set_config(file_config):
     config = file_config
 
 async def admin_create_sticker_pack(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if (update.message.from_user.id != config['admin_id']):
+    if (update.message.from_user.id != config['admin_user_id']):
         await update.message.reply_text("Admin-only command. Sorry!")
         return
     new_sticker = telegram.InputSticker(
         open("./test.png", "rb"),
-        ["🧪"]
+        ["🧪"],
+        format="static"
     )
     await context.bot.create_new_sticker_set(
-        config['admin_id'],
+        config['admin_user_id'],
         config['pack_name'],
-        config['pack_titles'],
+        config['pack_title'],
         [new_sticker],
         telegram.constants.StickerFormat.STATIC
     )
