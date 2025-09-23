@@ -56,12 +56,14 @@ async def preview(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return DONE
 
 async def done(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    new_sticker = telegram.InputSticker(
-        open(os.path.join(".", "temp", f"{update.effective_chat.id}.png"), "rb"),
-        ["💬"],
-        format="static"
-    )
-    await context.bot.add_sticker_to_set(config['admin_user_id'], config['pack_name'], new_sticker)
+    with open(os.path.join(".", "temp", f"{update.effective_chat.id}.png"), "rb") as sticker_file:
+        new_sticker = telegram.InputSticker(
+            sticker_file,
+            ["💬"],
+            format="static"
+        )
+        await context.bot.add_sticker_to_set(config['admin_user_id'], config['pack_name'], new_sticker)
+
     sticker_set = await context.bot.get_sticker_set(config['pack_name'])
     await update.message.reply_text(
         "Done! Re-add the pack to see it in your sticker menu.",
