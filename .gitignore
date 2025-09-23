@@ -2,3 +2,4 @@ env/
 credentials.yml
 temp/
 *.pyc
+**/__pycache__
