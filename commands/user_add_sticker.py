@@ -21,6 +21,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return QUOTE_TEXT
 
 async def quote_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_data[update.effective_chat.id] = { "quote": update.message.text }
     await update.message.reply_text(
         "Who said this?"
     )
