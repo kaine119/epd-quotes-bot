@@ -18,6 +18,7 @@ ADMIN_USER_ID = credentials['admin_user_id']
 
 admin_delete_sticker.set_admin_id(ADMIN_USER_ID)
 admin_create_pack.set_config(credentials)
+user_add_sticker.set_config(credentials)
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TOKEN).build()

@@ -8,6 +8,11 @@ import os
 QUOTE_TEXT, DEFAULT_OR_NEW_AUTHOR, AUTHOR, PREVIEW, DONE = range(5)
 
 chat_data = {}
+config = {}
+
+def set_config(file_config):
+    global config
+    config = file_config
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -68,8 +73,8 @@ async def done(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ["💬"],
         format="static"
     )
-    await context.bot.add_sticker_to_set(552476029, "epd_quotes_by_epd_quotes_bot", new_sticker)
-    sticker_set = await context.bot.get_sticker_set("epd_quotes_by_epd_quotes_bot")
+    await context.bot.add_sticker_to_set(config['admin_user_id'], config['pack_name'], new_sticker)
+    sticker_set = await context.bot.get_sticker_set(config['pack_name'])
     await update.message.reply_text(
         "Done! Re-add the pack to see it in your sticker menu.",
     )
